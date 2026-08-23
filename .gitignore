@@ -1,0 +1,18 @@
+# Python
+venv/
+.venv/
+__pycache__/
+*.pyc
+
+# MLflow
+mlruns/
+mlartifacts/
+
+# Models
+models/
+*.pkl
+*.joblib
+*.h5
+*.keras
+*.pt
+*.pth

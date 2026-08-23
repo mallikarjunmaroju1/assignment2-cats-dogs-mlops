@@ -1,0 +1,16 @@
+venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+data/raw/
+data/processed/
+dvc_storage/
+.dvc/cache/
+
+mlruns/
+artifacts/
+screenshots/
+reports/
+
+.git/
