@@ -1,0 +1,11 @@
+filename,true_label,predicted_class,confidence,latency_seconds,status_code,correct
+cat_0.jpg,cat,dog,0.5623,1.0044,200,False
+cat_1.jpg,cat,dog,0.5428,0.5325,200,False
+cat_10.jpg,cat,dog,0.5375,0.4867,200,False
+cat_11.jpg,cat,dog,0.5405,0.419,200,False
+cat_12.jpg,cat,dog,0.5303,0.7066,200,False
+dog_0.jpg,dog,dog,0.5497,0.4161,200,True
+dog_1.jpg,dog,dog,0.5365,0.2871,200,True
+dog_10.jpg,dog,dog,0.5531,0.7835,200,True
+dog_11.jpg,dog,dog,0.5564,0.3365,200,True
+dog_12.jpg,dog,dog,0.553,0.3556,200,True
