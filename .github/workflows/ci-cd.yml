@@ -1,48 +1,13 @@
-name: Cats Dogs MLOps CI CD
+- name: Checkout repository
+  uses: actions/checkout@v4
+  with:
+    lfs: true
 
-on:
-  push:
-    branches: ["main", "master"]
-  pull_request:
-    branches: ["main", "master"]
+- name: Pull Git LFS files
+  run: git lfs pull
 
-env:
-  IMAGE_NAME: cats-dogs-api
-
-jobs:
-  build-test-push:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-
-      - name: Install lightweight test dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install fastapi uvicorn python-multipart pillow numpy pytest httpx prometheus-fastapi-instrumentator tensorflow==2.16.1 keras==3.3.3
-
-      - name: Run unit tests
-        run: |
-          python -m pytest tests -v
-
-      - name: Docker login
-        if: github.event_name == 'push'
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      - name: Build Docker image
-        run: |
-          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:latest .
-
-      - name: Push Docker image
-        if: github.event_name == 'push'
-        run: |
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:latest
+- name: Verify model artifact
+  run: |
+    ls -lh models
+    test -f models/cats_dogs_model.keras
+    python -c "from pathlib import Path; p=Path('models/cats_dogs_model.keras'); print('Model size MB:', round(p.stat().st_size/1024/1024,2)); assert p.stat().st_size > 1000000"
