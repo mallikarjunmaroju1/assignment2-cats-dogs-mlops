@@ -1,18 +1,23 @@
-# Python
 venv/
 .venv/
+
 __pycache__/
 *.pyc
+.ipynb_checkpoints/
 
-# MLflow
 mlruns/
 mlartifacts/
 
-# Models
-models/
+.dvc/cache/
+
+data/raw/
+data/processed/
+
 *.pkl
 *.joblib
 *.h5
-#*.keras
 *.pt
 *.pth
+
+*.log
+.env
